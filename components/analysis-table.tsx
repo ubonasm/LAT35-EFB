@@ -215,16 +215,20 @@ export function AnalysisTable({
                       </>
                     )}
 
-                    <TableCell className="align-top overflow-hidden" style={{ wordBreak: 'break-all' }}>
+                    <TableCell className="align-top p-2">
+                      <div style={{ width: '220px', maxWidth: '220px', overflow: 'hidden' }}>
                       {extraction ? (
-                        <div className="group flex items-start gap-1">
-                          <span className="flex-1 rounded bg-muted px-2 py-1 text-sm" style={{ wordBreak: 'break-all' }}>
-                            {'"'}{extraction.text}{'"'}
-                          </span>
+                        <div className="group relative">
+                          <div 
+                            className="rounded bg-muted px-2 py-1 pr-7 text-sm"
+                            style={{ wordBreak: 'break-all', overflowWrap: 'break-word', whiteSpace: 'pre-wrap', width: '100%' }}
+                          >
+                            {extraction.text}
+                          </div>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-6 w-6 shrink-0 opacity-0 group-hover:opacity-100"
+                            className="absolute right-0 top-0 h-6 w-6 opacity-0 group-hover:opacity-100"
                             onClick={() => onRemoveExtraction(extraction.id)}
                           >
                             <X className="h-3 w-3" />
@@ -237,25 +241,26 @@ export function AnalysisTable({
                           </span>
                         )
                       )}
+                      </div>
                     </TableCell>
 
-                    <TableCell className="align-top overflow-hidden" style={{ wordBreak: 'break-all' }}>
+                    <TableCell className="align-top p-2">
+                      <div style={{ width: '220px', maxWidth: '220px', overflow: 'hidden', display: 'block' }}>
                       {extraction && (
-                        <div className="flex flex-wrap items-center gap-1">
+                        <>
                           {extraction.codes.map((code) => (
-                            <Badge 
+                            <div 
                               key={code} 
-                              variant="outline"
-                              className="group gap-1 bg-primary/5 text-xs"
+                              className="group relative rounded border border-border bg-primary/5 px-2 py-1 pr-6 text-xs mb-1"
                             >
-                              {'<'}{code}{'>'}
+                              <div style={{ wordBreak: 'break-all', overflowWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{code}</div>
                               <button
                                 onClick={() => handleRemoveCode(extraction.id, extraction.codes, code)}
-                                className="ml-0.5 opacity-0 group-hover:opacity-100"
+                                className="absolute right-1 top-1 opacity-0 group-hover:opacity-100"
                               >
-                                <X className="h-2.5 w-2.5" />
+                                <X className="h-3 w-3" />
                               </button>
-                            </Badge>
+                            </div>
                           ))}
                           
                           <Popover
@@ -305,8 +310,9 @@ export function AnalysisTable({
                               </form>
                             </PopoverContent>
                           </Popover>
-                        </div>
+                        </>
                       )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 )
