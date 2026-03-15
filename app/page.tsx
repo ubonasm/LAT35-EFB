@@ -11,6 +11,7 @@ import { CSVUploader } from '@/components/csv-uploader'
 import { AnalysisTable } from '@/components/analysis-table'
 import { APISettings } from '@/components/api-settings'
 import { CodeSummary } from '@/components/code-summary'
+import { MetaphorSuggestions } from '@/components/metaphor-suggestions'
 import { CodeDictionaryPanel } from '@/components/code-dictionary'
 import { AnalysisResults } from '@/components/analysis-results'
 import { useLessonStore } from '@/hooks/use-lesson-store'
@@ -313,6 +314,12 @@ export default function HomePage() {
 
               <aside className="space-y-6">
                 <CodeSummary extractions={getAllExtractions()} />
+                <MetaphorSuggestions
+                  records={records}
+                  extractions={getAllExtractions()}
+                  apiKey={apiKey}
+                  model={model}
+                />
                 <CodeDictionaryPanel
                   relations={codeRelations}
                   onRelationsChange={setCodeRelations}
